@@ -27,7 +27,7 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 6:
 # Now for the rest
 __version__ = '0.0.1'
 __author__ = 'theGrand'
-__source__ = 'https://github.com/sharp1kdev/avabot'
+__source__ = 'https://github.com/sharp1kdev/TelegramBot'
 __copyright__ = 'Copyright (c) 2019 ' + __author__
 
 __copystring__ = f"AvaBot v{__version__} | {__copyright__}"
@@ -39,7 +39,7 @@ except ValueError:
     LOGGER_GROUP = 0
 
 # Create Database if there is none yet.
-AVA_DB = str(Path(__file__).parent.parent / 'avabot.db')
+AVA_DB = str(Path(__file__).parent.parent / 'vkbot.db')
 
 LOGS.info("Checking Database...")
 db = sqlite3.connect(AVA_DB)
@@ -54,8 +54,8 @@ LOGS.info("Check done.")
 # Prepare the bot
 VKBOT = Client(
     session_name="VK_Anime_Videos",
-    api_id="607422",
-    api_hash="08340bc2bd6276058fbd1781d976826f",
+    api_id=os.getenv("TELEGRAM_APP_ID"),
+    api_hash=os.getenv("TELEGRAM_APP_HASH"),
     app_version=f"AvaBot \U0001f525\U0001F916 v{__version__}")
 
 # Global Variables
