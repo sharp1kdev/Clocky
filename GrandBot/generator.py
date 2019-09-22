@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from pathlib import Path
 from cv2 import imwrite
-from avatar.helpers import generate_image_with_text, convert_time_to_string
+from GrandBot.helpers import generate_image_with_text, convert_time_to_string
 
 
 def try_init_folders():
