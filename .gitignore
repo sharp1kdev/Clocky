@@ -117,4 +117,6 @@ config.ini
 # idea
 .idea
 
-*.db
+*.db/
+
+videos
