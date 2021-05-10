@@ -1,6 +1,6 @@
 from datetime import datetime
-
-from cv2 import putText, FONT_HERSHEY_SIMPLEX, LINE_AA
+import requests
+from cv2 import putText, imwrite, FONT_HERSHEY_SIMPLEX, LINE_AA
 from numpy import zeros
 
 
@@ -10,6 +10,31 @@ def convert_time_to_string(dt):
 
 def get_black_background():
     return zeros((500, 500))
+
+
+def generate_doge_image(text):
+    y0, dy = 60, 100
+    image = zeros((500, 500))
+    x = 10
+
+    for i, line in enumerate(text.split('\n')):
+        y = y0 + i * dy
+        putText(image, line, (x, y), 2, 2, (255, 255, 0), 3, 5)
+    imwrite('doge.jpg', image)
+
+
+def get_coin_data_text():
+    json_data = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd%2Cuah%2Crub')
+    doge_info = json_data.json()['dogecoin']
+    usd = doge_info['usd']
+    uah = doge_info['uah']
+    rub = doge_info['rub']
+
+    current_time = datetime.now().time().__str__()
+    current_time = current_time.split(':')
+    formatted_time = "{}:{}".format(current_time[0], current_time[1])
+    text = "   DOGECOIN\n    {}\nUSD: {}\nUAH: {}\nRUB: {}".format(formatted_time, usd, uah, rub)
+    return text
 
 
 def generate_image_with_text(text):
