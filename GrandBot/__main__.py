@@ -5,7 +5,10 @@ from GrandBot import BOT, LOGS
 from GrandBot.helpers import time_has_changed, convert_time_to_string, generate_doge_image, get_coin_data_text
 
 LOGS.info("Starting avatar changer...")
-BOT.start()
+try:
+    BOT.start()
+except Exception as e:
+    print(e)
 
 
 def change_picture(time_val):
